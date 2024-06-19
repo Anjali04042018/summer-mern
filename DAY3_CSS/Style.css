@@ -1,0 +1,122 @@
+/* .btn{
+    display: block;
+    background-color: rgb(70, 228, 70);
+    color: white;
+    width: fit-content;
+    margin: 10px auto;
+    font-size: 16px;
+    border: none;
+    padding: 0.4em 1em;
+    border-radius: 0.5em;
+
+    opacity: 0.8;
+transition: scale 3s ease;
+}
+
+.btn:hover{
+    background-color:rgb(19, 154, 19) ;
+    cursor: pointer;
+    scale: 1.2;
+} */
+
+
+/* a:visited{
+    color:red;
+    text-decoration: none;
+} */
+
+/* ul{
+    background-color: rgb(175, 239, 175);
+}
+
+li:last-child{
+    color: red;
+}
+li:nth-child(2){
+    color: blue;
+}
+li:nth-child(4){
+    color: rgb(126, 235, 231);
+}
+p:first-of-type{
+    color: blue;
+}
+
+h3::after{
+    content: '*';
+
+} */
+
+
+/* .child{
+    background-color: rgb(150, 150, 200);
+    border: 2px solid black;
+   flex-basis: 100px;
+}
+.parent{
+    background-color: greenyellow;
+    display: flex;
+}
+
+.search{
+    flex-grow: 2;
+    flex-shrink: 3;
+}
+.child3{
+    border: 2px solid black;
+    flex-grow: 2;
+    
+} */
+
+
+/* *{
+    padding: 0;
+    margin: 0;
+}
+
+.child{
+    background-color: aliceblue;
+    border: 1px solid gray;
+
+}
+
+.parent{
+    display: grid;
+    grid-template-columns: repeat(4,100px);
+    grid-auto-rows: 100px;
+    background-color: yellow;
+    row-gap: 10px;
+    column-gap: 20px;
+  
+}
+
+.child2{
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 4;
+} */
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.parent{
+    background-color: yellow;
+    height: 300px;
+    width: 300px;
+    margin: 40px;
+}
+
+
+.child2{
+    background-color: rgb(102, 220, 247);
+    height: 100px;
+    width: 100px;
+}
+.child2{
+    position:absolute;
+    left: 0px;
+    top: 20px;
+}

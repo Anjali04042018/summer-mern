@@ -1,0 +1,18 @@
+main{
+    background-color: aquamarine;
+    padding: 10px
+    
+}
+
+main>div{
+    width: 300px;
+    padding: 16px;
+    background-color: azure;
+    margin: 12px auto;
+
+}
+
+img{
+    max-width: 200px;
+    max-height: 200px;
+}
