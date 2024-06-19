@@ -21,8 +21,8 @@ module.exports = [sum,mul];
 
 
 
-// const figlet = require("figlet");
-// figlet("ANJALI.",(err,data) =>{
-//     if(err ) console.log(err);
-//     else console.log(data);
-// })
+const figlet = require("figlet");
+figlet("ANJALI",(err,data) =>{
+    if(err ) console.log(err);
+    else console.log(data);
+})
