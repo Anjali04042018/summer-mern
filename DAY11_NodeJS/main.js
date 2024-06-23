@@ -47,7 +47,9 @@ const app = http.createServer(async (req, res) => {
                 `<div>
                 <h2>${product.title}</h2>
                 <img src = "${product.thumbnail}" height= '300'>
+                <h3> ${product.category} Product</h3>
                 <h4>${product.price} </h4>
+                <p><b> Rating ${product.rating} </b></p>
                 <p> ${product.description}</p>
                 </div>`);
            
