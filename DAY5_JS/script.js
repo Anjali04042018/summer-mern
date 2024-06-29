@@ -185,7 +185,32 @@
 // )
 // d1.style.color = 'red';
 
-const d1 = document.querySelectorAll(
-    'div'
-)
-d1[2].style.color = 'red';
+// const d1 = document.querySelectorAll(
+//     'div'
+// )
+// d1[2].style.color = 'red';
+
+
+
+               // Normal Function
+
+const sum = function(a,b){
+    return a+b;
+}
+const addResult = sum(2,3);
+console.log(addResult)
+
+
+                // Arrow Function
+
+const mul = (a,b) =>{
+    return a*b;
+}
+const mulResult = mul(2,3);
+console.log(mulResult);
+
+  // Short form of arrow function.
+
+const mul1= (a,b) =>a*b;
+const mul1Result = mul1(3,4);
+console.log(mul1Result);

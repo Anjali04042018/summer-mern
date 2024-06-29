@@ -1,11 +1,42 @@
 // const { get } = require("../routes/productRoutes")
 // const {productsCollection } = require('../config/db.js')
+const { response } = require("express");
 const productModel = require("../models/productModel.js")
 
+const checkId = async (req, res, next) =>{
+    try{
+    const { id } = req.params;
+    // const product = await productModel.find{_id: id};
+    const product = await productModel.findbyId(id);
+    if(!product){
+        response.status(400);
+        res.json({
+            status: "Fail",
+            message:"Invalid product ID",
+        });
+        return;
+    }
+    next();
+}catch(err){
+    if(err.name === "CastError"){
+        res.status(400);
+        res.json({
+            status: "Fail",
+            message:"Invalid product ID",
+        })
+        return;
+    }
+    res.status(500);
+    res.json({
+        status: "Fail",
+        message:"Internal server error",
+    })
+}
+}
 
 const getProducts =async (req,res) =>{
     // const products = productsCollection.find().toArray();
-    const products = await productModel.find({});
+    const products = await productModel.find({}).limit(10);
     res.send({
         status: "Success",
         data:{
@@ -65,8 +96,75 @@ catch(err){
 }
 }
 
+const updateProduct = async (req, res) =>{
+    try{
+
+        const {id} = req.params;
+        const body = req.body;
+        body.updateAt = Date.now();
+        const newProduct = await productModel.findOneAndUpdate({_id:id}, body,{
+            new: true,
+        });
+        res.status(200);
+        res.json({
+            status: "success",
+            data:{
+                product:newProduct,
+            },
+        });
+    }catch(err){
+        res.status(500);
+        res.json({
+            status:"fail",
+            message: "Internal Server Error",
+            info: err,
+
+    });
+
+    }
+};
+
+const DeleteProduct = async (req, res) =>{
+    try{
+
+        const {id} = req.params;
+        const newProduct = await productModel.findByIdAndDelete(id);
+        res.status(204)
+        res.json({
+            status: "success",
+            data:{
+                product:null,
+            },
+        });
+    }catch(err){
+        res.status(500);
+        res.json({
+            status:"fail",
+            message: "Internal Server Error",
+            info: err,
+
+    });
+
+    }
+}
+
+const listProduct = async (req,res) =>{
+    const {limit = 10,...filters} = req.query; 
+    const pizzasQuery = productModel.find(filters);
+    const limitedPizzas = await pizzasQuery.limit(limit);
+    res.json({
+        status:"success",
+        data:{
+            pizzas: limitedPizzas,
+        },
+    });
+};
 module.exports={
     getProducts,
     createProduct,
     replaceProduct,
+    checkId,
+    updateProduct,
+    DeleteProduct,
+    listProduct,
 }
