@@ -16,7 +16,7 @@ let dbURL = uri.replace('<username>', process.env.DB_USERNAME)
 // }
 
 mongoose.connect(dbURL).then(() =>{
-    console.log("--------- DB Connected -----------");
+    console.log("-------------- DB Connected ----------------");
 })
 .catch((err) =>{
     console.log("DB connect Failed: \n");

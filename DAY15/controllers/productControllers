@@ -149,15 +149,43 @@ const DeleteProduct = async (req, res) =>{
 }
 
 const listProduct = async (req,res) =>{
-    const {limit = 10,...filters} = req.query; 
-    const pizzasQuery = productModel.find(filters);
-    const limitedPizzas = await pizzasQuery.limit(limit);
-    res.json({
-        status:"success",
-        data:{
-            pizzas: limitedPizzas,
-        },
-    });
+    try{
+
+        const {limit = 10,q="",fields="",sort="",page=1,...filters} = req.query; 
+        const selectionFields = fields.split("_").join(" ");
+        const sortFields = sort.split("_").join(" ");
+        let pizzasQuery = productModel.find(filters);
+        // Searching Functionality
+        pizzasQuery = pizzasQuery.where("title").regex(q);
+        // pizzasQuery = pizzasQuery.select(fields);
+        // Redece response size and select specific fields
+        pizzasQuery = pizzasQuery.select(selectionFields);
+        // sorting
+        pizzasQuery = pizzasQuery.sort(sortFields);
+    
+        // Count the total of result documents
+        const countQuery = pizzasQuery.clone();
+        const totalData = await countQuery.countDocuments();
+        // Pagination
+        pizzasQuery = pizzasQuery.skip((page -1) * limit)
+        pizzasQuery =await pizzasQuery.limit(limit);
+        // const pizzasQuery = productModel.find({
+        //     title:{
+        //         $regex: q,
+        //     }
+        // });
+        res.json({
+            status:"success", 
+            results:pizzasQuery.length,
+            totalData:totalData,
+            data:{
+                pizzas:pizzasQuery,
+            },
+        });
+    }catch(error){
+        console.log(error)
+    }
+    // console.log("--->", req.query);
 };
 module.exports={
     getProducts,
@@ -167,4 +195,5 @@ module.exports={
     updateProduct,
     DeleteProduct,
     listProduct,
+
 }
