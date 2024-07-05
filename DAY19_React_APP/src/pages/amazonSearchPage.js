@@ -32,22 +32,21 @@
 // export default SearchPage;
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import CategoryBar from "../components/categorybar";
 
+
 const SearchPage = (props) => {
-    const {categories} = props;
-    // let searchText = "";
-    const [searchText, setSearchText] = useState("");
+    const {categories,searchText, setSearchText} = props;
     const [products, setProducts] = useState([]);
     // console.log("initially: ", searchText);
 
-    const handleSearch = (e) => {
-        const val = e.target.value;
-        // searchText = val;
-        setSearchText(val);
-    };
+    // const handleSearch = (e) => {
+    //     const val = e.target.value;
+    //     // searchText = val;
+    //     setSearchText(val);
+    // };
 
     // async function getData() {
     //     const res = await fetch("https://dummyjson.com/products");
@@ -55,17 +54,21 @@ const SearchPage = (props) => {
     //     setProducts(data.products);
     // }
 
-    async function getData(e) {
-        const val = e.target.value;
-        const res = await fetch(`https://dummyjson.com/products/search?q=${val}`);
+    async function getData() {
+
+        const res = await fetch(`https://dummyjson.com/products/search?q=${searchText}`);
         const data = await res.json();
         setProducts(data.products);
-        console.log("API Called");
+       
     }
+    useEffect (() =>{
+        getData();
+
+    }, [searchText])
 
     return (
         <>
-        <Navbar getData={getData}/>
+        <Navbar setSearchText={setSearchText}/>
         <CategoryBar categories={categories} />
         <div>
             
@@ -73,7 +76,8 @@ const SearchPage = (props) => {
                 return <p key={elem.id}>{elem.title}</p>;
             })}
         </div>
-        
+
+        {/* <Revision/> */}
         </>
     );
 };

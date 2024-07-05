@@ -1,7 +1,9 @@
 import { IoSearchSharp } from "react-icons/io5";
 
-const Navbar = (props) => {
-    const {getData} = props;
+const Navbar = ({setSearchText,openSearchPage}) => {
+   const handleChange = (e) =>{
+    setSearchText(e.target.value);
+   };
     return(
     <nav className="homepage-nav">
         <h4>Amazon.in</h4>
@@ -12,8 +14,8 @@ const Navbar = (props) => {
         </p>
         <div className="homepage-search-container">
             <select />
-            <input type="text" onChange={getData}/>
-            <button>
+            <input type="text" onChange={handleChange}/>
+            <button onClick={openSearchPage}> 
                 <IoSearchSharp />
             </button>
         </div>

@@ -25,6 +25,9 @@ import ReactDOM from "react-dom/client";
 import "./style.css";
 import HomePage from "./src/pages/homePage";
 import SearchPage from "./src/pages/amazonSearchPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useState } from "react";
+import ProductInfo from "./src/pages/productInfo";
 
 const parent = document.getElementById("root");
 const root = ReactDOM.createRoot(parent);
@@ -132,16 +135,35 @@ const categories = [
     "Electronics",
 ];
 
+
+
 const App = () => {
-    return (
-        <div>
-            {/* <HomePage 
-                productInfoCards={productInfoCards} 
-                categories={categories}
-            /> */}
-            <SearchPage categories={categories} />
-        </div>
-    );
+    const [searchText, setSearchText] = useState("");
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element:<HomePage searchText = {searchText} setSearchText = {setSearchText} productInfoCards = {productInfoCards} categories={categories} />
+        },
+        {
+            path:'/search',
+            element: <SearchPage searchText = {searchText} setSearchText = {setSearchText} categories= {categories}/>
+        },
+        {
+        path:"/search/:id",
+        element: <ProductInfo/>
+        }
+    ])
+    
+        // <div>
+        //     <HomePage 
+        //         productInfoCards={productInfoCards} 
+        //         categories={categories}
+        //     />
+        //     <SearchPage categories={categories} />
+        // </div>
+
+        return  <RouterProvider router = {router}/>
+    
 };
 
 root.render(<App />);

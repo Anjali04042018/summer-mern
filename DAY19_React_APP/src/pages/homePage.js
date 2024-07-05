@@ -80,12 +80,18 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import ProductInfoCard from "../components/productInfoCard";
 import Navbar from "../components/navbar";
 import CategoryBar from "../components/categorybar";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = (props) => {
-    const { productInfoCards, categories } = props;
+    const { productInfoCards, categories ,searchText, } = props;
+    const navigate = useNavigate();
+
+    const openSearchPage = () =>{
+        navigate("/search")
+    }
     return (
         <div className="homepage-root-container">
-            <Navbar />
+            <Navbar searchText={searchText} openSearchPage={openSearchPage}/>
             <CategoryBar categories={categories} />
             <div className="homepage-body">
                 <img
