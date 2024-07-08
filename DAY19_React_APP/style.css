@@ -1,8 +1,4 @@
- /* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/*
 .homepage-root-container{
     background-color: antiquewhite;
     
@@ -181,4 +177,12 @@
             }
         }
     }
+}
+
+.product{
+    display: block;
+    width: fit-content;
+   
+    width: 100%;
+    /* flex-wrap: wrap; */
 }
